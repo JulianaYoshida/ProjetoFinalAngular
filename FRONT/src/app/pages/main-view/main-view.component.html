@@ -1,0 +1,36 @@
+<div class="root">
+  <div class="navbar navbar-dark bg-dark">
+    <div class="navbar-brand">
+      <div class="nav-item">
+        <h1 class="app-name has-gradient-text">Kanban</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="board-bar">
+        <p class="board-name">{{ board.name }}</p>
+    </div>
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+          <div class="column-title"> {{ column.name }}</div>
+          <button class="btn btn-outline-secondary new-task-button" (click)="createNewCard()"> + New Task</button>
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.cards"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="task-container" *ngFor="let cards of column.cards" cdkDrag>
+              <div class="task-title">{{ cards.name }}</div>
+              <div class="task-description">{{ cards.description }}</div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
